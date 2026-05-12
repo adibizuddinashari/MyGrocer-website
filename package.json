@@ -1,0 +1,7 @@
+{
+  "name": "mygrocer-website",
+  "type": "module",
+  "dependencies": {
+    "puppeteer": "^24.39.1"
+  }
+}
