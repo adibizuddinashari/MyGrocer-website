@@ -70,7 +70,8 @@
   .hero-marquee .dotm{width:6px;height:6px;background:var(--purple);border-radius:50%}
 
   .store-stage{position:relative;aspect-ratio:1/1;background:var(--purple);border-radius:32px;padding:28px;color:#fff;box-shadow:0 30px 60px -20px rgba(0,0,0,.25);overflow:hidden}
-  .store-stage::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 80% 20%, rgba(255,222,23,.25), transparent 40%),radial-gradient(circle at 20% 80%, rgba(255,222,23,.18), transparent 40%)}
+  .store-stage::before{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(0,0,0,.18) 0%,rgba(0,0,0,.5) 100%);z-index:1}
+  .store-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
   .store-top{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:2}
   .store-name{font-weight:800;font-size:14px;letter-spacing:.04em}
   .store-status{font-size:11px;font-weight:700;background:var(--yellow);color:var(--ink);padding:4px 10px;border-radius:999px;display:flex;align-items:center;gap:6px}
@@ -383,13 +384,7 @@ function Hero({onNotify}){
             <div className="store-name">MYGROCER · TAMAN BAHAGIA</div>
             <div className="store-status"><span style={{width:6,height:6,background:'var(--ink)',borderRadius:'50%'}}></span>{t("BUKA 9 PAGI–10 MLM","OPEN 9AM–10PM")}</div>
           </div>
-          <div className="door">
-            <div className="face-ring"><div className="face"><div className="face-smile"></div></div></div>
-            <div className="shelf">
-              {Array.from({length:15}).map((_,i)=>(<div key={i}/>))}
-            </div>
-            <div className="door-floor"></div>
-          </div>
+          <img src="assets/front store image.png" className="store-img" alt="MyGrocer store front"/>
           <div className="store-badge badge-tl">
             <span className="ico"><I.face style={{width:18,height:18}}/></span>
             <div>
@@ -522,8 +517,8 @@ function Products(){
     {h:t("Mi Segera","Instant Noodles"),           alt:t("Instant Noodles","Mi Segera"),           ico:<I.noodle/>, n:18, img:{src:"assets/product-noodle.png",style:{left:148,top:30,width:156,height:156}}},
     {h:t("Minuman","Beverages"),                   alt:t("Beverages","Minuman"),                   ico:<I.drink/>, n:42, img:{src:"assets/product-water.png",style:{left:97,top:-61,width:214,height:161}}},
     {h:t("Perasa & Sos","Condiments"),             alt:t("Condiments","Perasa & Sos"),             ico:<I.spice/>, n:31, img:{src:"assets/product-sauce.png",style:{left:133,top:6,width:177,height:190}}},
-    {h:t("Cucian Rumah","Household & Cleaning"),   alt:t("Household & Cleaning","Cucian Rumah"),   ico:<I.broom/>, n:22},
-    {h:t("Penjagaan Diri","Personal Care"),        alt:t("Personal Care","Penjagaan Diri"),        ico:<I.soap/>, n:27},
+    {h:t("Cucian Rumah","Household & Cleaning"),   alt:t("Household & Cleaning","Cucian Rumah"),   ico:<I.broom/>, n:22, img:{src:"assets/product-oil.png",style:{left:118,top:10,width:210,height:195}}},
+    {h:t("Penjagaan Diri","Personal Care"),        alt:t("Personal Care","Penjagaan Diri"),        ico:<I.soap/>, n:27, img:{src:"assets/product-water.png",style:{left:88,top:-59,width:214,height:161}}},
     {h:t("Snek","Snacks"),                         alt:t("Snacks","Snek"),                         ico:<I.snack/>, n:36, highlight:true},
   ];
   return (
