@@ -288,7 +288,7 @@ const I = {
 };
 
 /* ============ NAV ============ */
-function Nav({onNotify}){
+function Nav(){
   const t = useT();
   const {lang,setLang} = useLang();
   return (
@@ -309,9 +309,9 @@ function Nav({onNotify}){
             <button className={lang==='bm'?'on':''} onClick={()=>setLang('bm')}>BM</button>
             <button className={lang==='en'?'on':''} onClick={()=>setLang('en')}>EN</button>
           </div>
-          <button className="btn btn-yellow" onClick={onNotify}>
-            <I.pin/> {t("Beritahu Saya","Notify Me")}
-          </button>
+          <a className="btn btn-yellow" href="#contact">
+            <I.pin/> {t("Kedai Kami","Our Store")}
+          </a>
         </div>
       </div>
     </nav>
@@ -319,7 +319,7 @@ function Nav({onNotify}){
 }
 
 /* ============ HERO ============ */
-function Hero({onNotify}){
+function Hero(){
   const t = useT();
   const SLIDES = [
     {
@@ -341,7 +341,7 @@ function Hero({onNotify}){
       tag:t("02 / TANPA QUEUE","02 / NO QUEUE, NO CASHIER"),
     },
     {
-      badge:t("UNTUK B40 & M40","COMMUNITY-FIRST · FOR B40 & M40"),
+      badge:t("UNTUK SEMUA JIRAN","FOR EVERY NEIGHBOUR"),
       title:t(<>Untuk keluarga. <span className="slash">Untuk</span> jiran.</>, <>For families. <span className="slash">For</span> neighbours.</>),
       sub:t(
         <>Direka khas untuk taman perumahan Malaysia. Harga rendah, capaian dekat, dan teknologi yang melayan semua orang dengan hormat.</>,
@@ -362,9 +362,9 @@ function Hero({onNotify}){
           <div className="mono" style={{fontSize:13,color:'var(--purple)',fontWeight:700,letterSpacing:'.1em',marginTop:6}}>{t("…SENANG AJE!","…IT'S THAT EASY!")}</div>
           <p className="hero-sub">{s.sub}</p>
           <div className="hero-cta">
-            <button className="btn btn-primary" onClick={onNotify}>
-              {t("Beritahu Saya Bila Buka","Notify Me When We Open")} <I.arrow/>
-            </button>
+            <a className="btn btn-primary" href="#about">
+              {t("Ketahui Lebih Lanjut","Learn More")} <I.arrow/>
+            </a>
             <a className="btn btn-ghost" href="#how">{t("Cara Guna","How It Works")}</a>
           </div>
           <div className="hero-marquee">
@@ -416,8 +416,8 @@ function WhatIs(){
           <h2 data-anim="up" data-delay="1">{t(<>Kedai runcit <span style={{color:'var(--purple)'}}>layan diri</span> pertama di Malaysia.</>, <>Malaysia's first <span style={{color:'var(--purple)'}}>self-service</span> grocery store.</>)}</h2>
           <p className="sec-lede" style={{marginTop:18}} data-anim="up" data-delay="2">
             {t(
-              <>MyGrocer™ ialah konsep kedai runcit <b style={{color:'var(--ink)'}}>tanpa juruwang</b> dan <b style={{color:'var(--ink)'}}>tanpa beratur</b>, direka khas untuk keluarga B40 dan M40 di Malaysia. <b>Masuk</b> dengan face scan, <b>ambil</b> keperluan harian dari rak, dan <b>check out</b> terus guna e-wallet. …senang aje!</>,
-              <>MyGrocer™ is a <b style={{color:'var(--ink)'}}>cashier-less</b>, <b style={{color:'var(--ink)'}}>queue-less</b> grocery store concept, designed specifically for B40 and M40 families across Malaysia. <b>Enter</b> with face scan, <b>pick</b> your daily essentials from the shelf, and <b>check out</b> straight from your e-wallet. …it's that easy!</>
+              <>MyGrocer™ ialah konsep kedai runcit <b style={{color:'var(--ink)'}}>tanpa juruwang</b> dan <b style={{color:'var(--ink)'}}>tanpa beratur</b>, direka khas untuk semua keluarga di Malaysia. <b>Masuk</b> dengan face scan, <b>ambil</b> keperluan harian dari rak, dan <b>check out</b> terus guna e-wallet. …senang aje!</>,
+              <>MyGrocer™ is a <b style={{color:'var(--ink)'}}>cashier-less</b>, <b style={{color:'var(--ink)'}}>queue-less</b> grocery store concept, designed for every family across Malaysia. <b>Enter</b> with face scan, <b>pick</b> your daily essentials from the shelf, and <b>check out</b> straight from your e-wallet. …it's that easy!</>
             )}
           </p>
           <div className="what-stat">
@@ -532,7 +532,7 @@ function Products(){
           </div>
           <div style={{display:'flex',gap:10,alignItems:'center'}}>
             <span className="mono" style={{fontSize:12,color:'var(--muted)'}}>208 SKU</span>
-            <a className="btn btn-ghost" href="#notify" style={{padding:'10px 16px'}}>{t("Cadang produk","Suggest a product")} <I.arrow/></a>
+            <a className="btn btn-ghost" href="#contact" style={{padding:'10px 16px'}}>{t("Cadang produk","Suggest a product")} <I.arrow/></a>
           </div>
         </div>
         <div className="cats">
@@ -607,67 +607,6 @@ function StoreLoc(){
   );
 }
 
-/* ============ NOTIFY ============ */
-function Notify(){
-  const t = useT();
-  const [email,setEmail]=useState('');
-  const [submitted,setSubmitted]=useState(false);
-  const submit=(e)=>{e.preventDefault();if(email.includes('@')){setSubmitted(true)}}
-  const perks = [
-    [t("Jemputan soft-launch eksklusif","Exclusive soft-launch invite"), t("Datang sebelum orang lain","Be there before anyone else")],
-    [t("Baucar RM10 untuk pembelian pertama","RM10 voucher on your first visit"), t("Percuma, untuk anda","Free, on us")],
-    [t("Berita awal bila kedai baru buka di kawasan anda","First to know when stores open near you"), t("Tanpa spam","No spam, ever")],
-  ];
-  return (
-    <section id="notify" style={{paddingBottom:120}}>
-      <div className="container">
-        <div className="notify-card">
-          <div className="notify-grid">
-            <div>
-              <span className="eyebrow" style={{color:'var(--purple)'}} data-anim="up">06 / {t("Daftar minat","Register interest")}</span>
-              <h2 data-anim="up" data-delay="1">{t("Kami akan buka tidak lama lagi!","We're opening soon!")}</h2>
-              <p className="sec-lede" style={{maxWidth:520}}>
-                {t("Daftar email anda di bawah dan dapatkan jemputan VIP ke majlis pembukaan, plus baucar percuma RM10 untuk pembelian pertama.","Drop your email below for a VIP invite to the opening · plus a free RM10 voucher on your first visit.")}
-              </p>
-              {submitted ? (
-                <div style={{marginTop:24,background:'#fff',border:'2px solid var(--ink)',borderRadius:14,padding:'16px 20px',display:'flex',alignItems:'center',gap:12,maxWidth:520}}>
-                  <span style={{width:32,height:32,borderRadius:'50%',background:'var(--purple)',color:'var(--yellow)',display:'grid',placeItems:'center'}}><I.check style={{width:14,height:14}}/></span>
-                  <div>
-                    <div style={{fontWeight:800}}>{t("Terima kasih!","Thank you!")}</div>
-                    <div style={{fontSize:13,color:'var(--muted)'}}>{t("Kami akan email anda bila pintu MyGrocer dibuka.","We'll email you the moment MyGrocer's doors open.")}</div>
-                  </div>
-                </div>
-              ) : (
-                <form className="notify-form" onSubmit={submit}>
-                  <input type="email" required placeholder={t("nama@email.com","you@email.com")} value={email} onChange={e=>setEmail(e.target.value)}/>
-                  <button type="submit">{t("Beritahu Saya","Notify Me")} <I.arrow style={{width:14,height:14}}/></button>
-                </form>
-              )}
-              <div className="notify-perks">
-                {perks.map(([a,b],i)=>(
-                  <div className="notify-perk" key={i}>
-                    <span className="check"><I.check/></span>
-                    <span>{a} <span style={{color:'var(--muted)',fontWeight:500}}>· {b}</span></span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="notify-side" data-anim="scale" data-delay="3">
-              <div className="ns-head">{t("Daftar minat","Interest list")}</div>
-              <div className="ns-bignum">1,842</div>
-              <div style={{fontSize:13,color:'var(--muted)',marginTop:-4,marginBottom:8}}>{t("Jiran yang dah daftar setakat ini","Neighbours signed up so far")}</div>
-              <div className="ns-row"><span>{t("Pembukaan dirancang","Planned opening")}</span><span className="v">Q3 2026</span></div>
-              <div className="ns-row"><span>{t("Lokasi pertama","First location")}</span><span className="v">PJ · TMN BAHAGIA</span></div>
-              <div className="ns-row"><span>{t("Lokasi seterusnya","Next locations")}</span><span className="v">{t("5 KAWASAN","5 AREAS")}</span></div>
-              <div className="ns-row"><span>{t("Status pemilihan tapak","Site-selection status")}</span><span className="v" style={{color:'#1D7979'}}>{t("● ON-GOING","● ONGOING")}</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 /* ============ FOOTER ============ */
 function Footer(){
   const t = useT();
@@ -705,7 +644,7 @@ function Footer(){
                 <li>+60 3 1234 5678</li>
                 <li>hello@mygrocer.com.my</li>
                 <li>Petaling Jaya, Selangor</li>
-                <li><a href="#notify">{t("Daftar minat","Register interest")}</a></li>
+                <li><a href="#contact">{t("Daftar minat","Register interest")}</a></li>
               </ul>
             </div>
             <div className="foot-col">
@@ -755,17 +694,17 @@ function App(){
     requestAnimationFrame(raf);
     return ()=>lenis.destroy();
   },[]);
-  const scrollTo=(id)=>()=>{const el=document.getElementById(id);if(el)window.scrollTo({top:el.offsetTop-60,behavior:'smooth'})};
+
   return (
     <LangCtx.Provider value={{lang,setLang}}>
-      <Nav onNotify={scrollTo('notify')}/>
-      <Hero onNotify={scrollTo('notify')}/>
+      <Nav />
+      <Hero />
       <WhatIs/>
       <HowItWorks/>
       <Why/>
       <Products/>
       <StoreLoc/>
-      <Notify/>
+      
       <Footer/>
     </LangCtx.Provider>
   );
