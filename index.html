@@ -100,18 +100,19 @@
   h2{font-size:clamp(32px,3.6vw,48px);line-height:1.08;letter-spacing:-.02em;font-weight:800;margin:14px 0 10px}
   .sec-lede{font-size:18px;color:var(--muted);max-width:640px;line-height:1.55}
 
-  .what-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:64px;align-items:center}
+  .what-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:center}
+  .what-slider{position:relative;aspect-ratio:1/1.05;border-radius:24px;overflow:hidden;border:1.5px solid var(--line);box-shadow:0 20px 48px -16px rgba(61,43,158,.18)}
+  .what-slide-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .9s cubic-bezier(.22,1,.36,1)}
+  .what-slide-img.active{opacity:1}
+  .what-slider-dots{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:10}
+  .what-dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.55);border:none;cursor:pointer;padding:0;transition:all .25s}
+  .what-dot.on{background:#fff;width:22px;border-radius:4px}
   .what-stat{display:flex;gap:18px;margin-top:32px;flex-wrap:wrap}
   .stat-card{flex:1;min-width:140px;background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:18px}
   .stat-num{font-size:32px;font-weight:800;color:var(--purple);letter-spacing:-.02em}
   .stat-lbl{font-size:13px;color:var(--muted);font-weight:600;margin-top:4px}
-  .what-visual{aspect-ratio:1/1.05;background:repeating-linear-gradient(45deg,#FFF8D0 0 14px,#fff 14px 28px);border-radius:24px;position:relative;overflow:hidden;border:1.5px solid var(--line)}
-  .what-card{position:absolute;background:#fff;border:1.5px solid var(--ink);border-radius:14px;padding:14px;box-shadow:6px 6px 0 var(--ink)}
-  .wc1{top:24px;left:24px;width:55%}
-  .wc2{bottom:24px;right:24px;width:60%}
   .wc-row{display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:700}
   .wc-amt{font-family:'Noto Sans',sans-serif;color:var(--purple)}
-  .wc-items{margin-top:8px;display:grid;gap:4px;font-size:11px;color:var(--muted);font-family:'Noto Sans',sans-serif}
 
   .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;counter-reset:s}
   .step{background:#fff;border:1.5px solid var(--line);border-radius:24px;padding:32px;position:relative;transition:transform .25s, box-shadow .25s, border-color .25s}
@@ -384,7 +385,7 @@ function Hero(){
             <div className="store-name">MYGROCER · TAMAN BAHAGIA</div>
             <div className="store-status"><span style={{width:6,height:6,background:'var(--ink)',borderRadius:'50%'}}></span>{t("BUKA 9 PAGI–10 MLM","OPEN 9AM–10PM")}</div>
           </div>
-          <img src="assets/front store image.png" className="store-img" alt="MyGrocer store front"/>
+          <img src="images/Front Shop .jpg" className="store-img" alt="MyGrocer store front"/>
           <div className="store-badge badge-tl">
             <span className="ico"><I.face style={{width:18,height:18}}/></span>
             <div>
@@ -406,11 +407,31 @@ function Hero(){
 }
 
 /* ============ WHAT IS ============ */
+const WHAT_SLIDES = [
+  'images/Artboard1.jpg','images/Artboard2.jpg','images/Artboard3.jpg',
+  'images/Artboard4.jpg','images/Artboard5.jpg','images/Artboard6.jpg',
+  'images/Artboard7.jpg','images/Artboard8.jpg','images/Artboard9.jpg',
+];
 function WhatIs(){
   const t = useT();
+  const [active, setActive] = useState(0);
+  useEffect(()=>{
+    const timer = setInterval(()=> setActive(i=>(i+1)%WHAT_SLIDES.length), 3500);
+    return ()=> clearInterval(timer);
+  },[]);
   return (
     <section id="about">
       <div className="container what-grid">
+        <div className="what-slider" data-anim="left">
+          {WHAT_SLIDES.map((src,i)=>(
+            <img key={src} src={src} alt={"MyGrocer store "+(i+1)} className={"what-slide-img"+(i===active ? " active" : "")}/>
+          ))}
+          <div className="what-slider-dots">
+            {WHAT_SLIDES.map((_,i)=>(
+              <button key={i} className={"what-dot"+(i===active ? " on" : "")} onClick={()=>setActive(i)} aria-label={"Slide "+(i+1)}/>
+            ))}
+          </div>
+        </div>
         <div>
           <span className="eyebrow" data-anim="up">01 / {t("Apa itu MyGrocer?","What is MyGrocer?")}</span>
           <h2 data-anim="up" data-delay="1">{t(<>Kedai runcit <span style={{color:'var(--purple)'}}>layan diri</span> pertama di Malaysia.</>, <>Malaysia's first <span style={{color:'var(--purple)'}}>self-service</span> grocery store.</>)}</h2>
@@ -424,23 +445,6 @@ function WhatIs(){
             <div className="stat-card" data-anim="scale" data-delay="3"><div className="stat-num">200+</div><div className="stat-lbl">{t("SKU keperluan harian","Daily-essential SKUs")}</div></div>
             <div className="stat-card" data-anim="scale" data-delay="4"><div className="stat-num">{t("13 jam","13 hrs")}</div><div className="stat-lbl">{t("Buka setiap hari","Open every day")}</div></div>
             <div className="stat-card" data-anim="scale" data-delay="5"><div className="stat-num">0</div><div className="stat-lbl">{t("Kasyer · tunai · queue","Cashiers · cash · queues")}</div></div>
-          </div>
-        </div>
-        <div className="what-visual" data-anim="right">
-          <div className="what-card wc1">
-            <div className="wc-row"><span>{t("BIL #00284","RECEIPT #00284")}</span><span className="wc-amt">RM 12.40</span></div>
-            <div className="wc-items">
-              <span>· {t("Beras Cap Rambutan 5kg","Rambutan-brand rice 5kg")}</span>
-              <span>· {t("Maggi Kari × 5","Curry instant noodle × 5")}</span>
-              <span>· {t("Telur AA Gred","Grade AA eggs")}</span>
-            </div>
-          </div>
-          <div className="what-card wc2">
-            <div className="wc-row"><span>TNG eWALLET</span><span className="wc-amt" style={{color:'#1D7979'}}>{t("BAYAR ✓","PAID ✓")}</span></div>
-            <div className="wc-items" style={{marginTop:10}}>
-              <span>Ref: MYG-2026-00284</span>
-              <span>{t("05:42 PTG · 18 saat","05:42 PM · 18 sec total")}</span>
-            </div>
           </div>
         </div>
       </div>
