@@ -343,7 +343,7 @@ function Hero(){
   const t = useT();
   const SLIDES = [
     {
-      badge:t("AKAN DIBUKA · COMING SOON","COMING SOON · OPENING SHORTLY"),
+      badge:t("BUKA SEKARANG · TAMAN SRI SENTOSA","NOW OPEN · TAMAN SRI SENTOSA"),
       title:t(<>Masuk. <span className="slash">Ambil.</span> Check Out!</>, <>Enter. <span className="slash">Pick.</span> Check Out!</>),
       sub:t(
         <><b>Kedai runcit layan diri pertama di Malaysia.</b> Masuk dengan face scan, ambil keperluan harian dari rak, dan check out terus guna e-wallet. <b>…senang aje!</b></>,
@@ -352,7 +352,7 @@ function Hero(){
       tag:t("01 / KEDAI LAYAN DIRI","01 / SELF-SERVICE GROCERY"),
     },
     {
-      badge:t("COMING SOON · BUKA TIDAK LAMA LAGI","COMING SOON · OPENING SHORTLY"),
+      badge:t("BUKA SEKARANG · TAMAN SRI SENTOSA","NOW OPEN · TAMAN SRI SENTOSA"),
       title:t(<>Tanpa kasyer. <span className="slash">Tanpa</span> queue.</>, <>No cashier. <span className="slash">No</span> queue.</>),
       sub:t(
         <>Beli keperluan harian bila-bila masa, dengan harga jujur dan teknologi yang mudah difahami. <b>Untuk semua keluarga.</b></>,
@@ -561,7 +561,6 @@ function Products(){
             <span className="eyebrow">04 / {t("Tawaran kami","Our deals")}</span>
             <h2>{t("Jimat Lebih, Dapat Lebih.","Save More, Get More.")}</h2>
           </div>
-          <a className="btn btn-ghost" href="#" style={{padding:'10px 16px'}}>{t("Semua Promosi","All Promotions")} <I.arrow/></a>
         </div>
         <div className="deal-carousel-wrap" data-anim="up" data-delay="1">
           <button className="deal-nav" onClick={()=>scrollTo(idx-1)} disabled={idx<=0} aria-label={t("Sebelum","Previous")}>&#8249;</button>
