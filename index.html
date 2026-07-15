@@ -4,6 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>MyGrocer™ · Kedai Runcit Layan Diri Pertama di Malaysia · …senang aje!</title>
+<link rel="icon" type="image/png" href="brand%20assets/MyGrocer%20Favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=BioRhyme:wght@400;700;800&family=Noto+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -352,7 +353,7 @@ function Nav(){
     {href:'#home',  label:t('Utama','Home')},
     {href:'#about', label:t('Tentang Kami','About Us')},
     {href:'#how',   label:t('Cara Guna','How It Works')},
-    {href:'#store', label:t('Produk','Products')},
+    {href:'#contact', label:t('Produk','Products')},
     {href:'#contact',label:t('Lokasi','Location')},
   ];
   useEffect(()=>{
@@ -572,82 +573,6 @@ function Why(){
   );
 }
 
-/* ============ PRODUCTS ============ */
-function Products(){
-  const t = useT();
-  const trackRef = React.useRef(null);
-  const [idx, setIdx] = React.useState(0);
-  const DEALS = [
-    {name:t("Dynamo Powder Downy 2KG","Dynamo Powder Downy 2KG"),                             np:"13.90",sp:"8.99",  img:"assets/product-rice.png",   period:"1 – 30.6.2026"},
-    {name:t("Dynamo Power Gel Perfect Clean / Downy Refill 810ML","Dynamo Power Gel Perfect Clean / Downy Refill 810ML"), np:"11.90",sp:"6.99",  img:"assets/product-oil.png",    period:"1 – 30.6.2026"},
-    {name:t("Dove Go Fresh / Beauty Nourishing Body Wash 1L","Dove Go Fresh / Beauty Nourishing Body Wash 1L"),         np:"24.90",sp:"18.99", img:"assets/product-water.png",  period:"1 – 30.6.2026"},
-    {name:t("Blinic Antibacterial Soap Clean / Pine / Fresh 3x105G","Blinic Antibacterial Soap Clean / Pine / Fresh 3x105G"), np:"6.90", sp:"5.99",  img:"assets/product-sauce.png",  period:"1 – 30.6.2026"},
-    {name:t("Maggi Mi Goreng Asli 5x80G","Maggi Mi Goreng Asli 5x80G"),                       np:"8.90", sp:"5.49",  img:"assets/product-noodle.png", period:"1 – 30.6.2026"},
-    {name:t("Cap Faiza Beras Super Tempatan 5KG","Cap Faiza Beras Super Tempatan 5KG"),        np:"22.00",sp:"16.99", img:"assets/product-rice.png",   period:"1 – 30.6.2026"},
-  ];
-  const [visCount, setVisCount] = React.useState(4);
-  React.useEffect(()=>{
-    const tr = trackRef.current;
-    if(!tr) return;
-    const calc = ()=>{
-      const card = tr.children[0];
-      if(card) setVisCount(Math.max(1, Math.round(tr.offsetWidth / (card.offsetWidth + 12))));
-    };
-    calc();
-    window.addEventListener('resize', calc);
-    return ()=>window.removeEventListener('resize', calc);
-  },[]);
-  const maxIdx = Math.max(0, DEALS.length - visCount);
-  const scrollTo = (n) => {
-    const clamped = Math.max(0, Math.min(Math.max(0, DEALS.length - visCount), n));
-    setIdx(clamped);
-    const tr = trackRef.current;
-    if(!tr || !tr.children[0]) return;
-    tr.scrollTo({left: clamped * (tr.children[0].offsetWidth + 12), behavior:'smooth'});
-  };
-  return (
-    <section className="tinted" id="store">
-      <div className="container">
-        <div className="prod-head" data-anim="up">
-          <div>
-            <span className="eyebrow">04 / {t("Tawaran kami","Our deals")}</span>
-            <h2>{t("Jimat Lebih, Dapat Lebih.","Save More, Get More.")}</h2>
-          </div>
-        </div>
-        <div className="deal-carousel-wrap" data-anim="up" data-delay="1">
-          <button className="deal-nav" onClick={()=>scrollTo(idx-1)} disabled={idx<=0} aria-label={t("Sebelum","Previous")}>&#8249;</button>
-          <div className="deal-track" ref={trackRef}>
-            {DEALS.map((d,i)=>(
-              <div className="deal-card" key={i}>
-                <div className="deal-card-top">
-                  <div className="deal-ribbon"></div>
-                  <div className="deal-promo-label">{t("PROMOSI MYGROCER","MYGROCER PROMOTION")}</div>
-                </div>
-                <div className="deal-card-body">
-                  <div className="deal-img-wrap">
-                    <img src={d.img} alt="" className="deal-img"/>
-                  </div>
-                  <div className="deal-price-wrap">
-                    <div className="deal-np">{t("H.BIASA","N.PRICE")}: <s>RM{d.np}</s></div>
-                    <div className="deal-price-row">
-                      <span className="deal-price-rm">RM</span>
-                      <span className="deal-price-num">{d.sp}</span>
-                    </div>
-                    <div className="deal-price-each">/{t("SETIAP","EACH")}</div>
-                    <div className="deal-name">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-                  </div>
-                </div>
-                <div className="deal-disclaimer">{t("*Harga tertakluk perubahan tanpa notis. Sah selagi stok ada.","*Prices subject to change without prior notice. While stocks last.")}</div>
-              </div>
-            ))}
-          </div>
-          <button className="deal-nav" onClick={()=>scrollTo(idx+1)} disabled={idx>=maxIdx} aria-label={t("Seterusnya","Next")}>&#8250;</button>
-        </div>
-      </div>
-    </section>
-  );
-}
-
 /* ============ STORE LOCATOR ============ */
 function StoreLoc(){
   const t = useT();
@@ -724,7 +649,7 @@ function StoreLoc(){
   return (
     <section id="contact">
       <div className="container">
-        <span className="eyebrow" data-anim="up">05 / {t("Kedai kami","Our stores")}</span>
+        <span className="eyebrow" data-anim="up">04 / {t("Kedai kami","Our stores")}</span>
         <h2 data-anim="up" data-delay="1">{t("Jumpa kami di sini.","Find us here.")}</h2>
         <div className="loc-grid">
           <div className="map" data-anim="left" ref={mapRef}></div>
@@ -795,7 +720,7 @@ function Footer(){
                 <li><a href="#home">{t("Utama","Home")}</a></li>
                 <li><a href="#about">{t("Tentang Kami","About Us")}</a></li>
                 <li><a href="#how">{t("Cara Guna","How It Works")}</a></li>
-                <li><a href="#store">{t("Lokasi","Location")}</a></li>
+                <li><a href="#contact">{t("Lokasi","Location")}</a></li>
               </ul>
             </div>
             <div className="foot-col">
@@ -859,7 +784,6 @@ function App(){
       <WhatIs/>
       <HowItWorks/>
       <Why/>
-      <Products/>
       <StoreLoc/>
       
       <Footer/>
