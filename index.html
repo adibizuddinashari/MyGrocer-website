@@ -1,16 +1,26 @@
 <!doctype html>
-<html lang="en">
+<html lang="ms">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>MyGrocer™ · Kedai Runcit Layan Diri Pertama di Malaysia · …senang aje!</title>
+<meta name="description" content="MyGrocer™ ialah kedai runcit layan diri pertama di Malaysia. Masuk dengan face scan, ambil keperluan harian, check out guna e-wallet. Buka setiap hari 8 pagi – 10 malam di Taman Sri Sentosa dan Taman Medan." />
+<meta name="theme-color" content="#FFDE17" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="MyGrocer™" />
+<meta property="og:url" content="https://mygrocer.com.my/" />
+<meta property="og:title" content="MyGrocer™ · Kedai Runcit Layan Diri Pertama di Malaysia" />
+<meta property="og:description" content="Masuk · Ambil · Check Out · …senang aje! Buka setiap hari 8 pagi – 10 malam." />
+<meta property="og:image" content="https://mygrocer.com.my/images/MyGrocer%20Store%20Front-web.jpg" />
+<meta property="og:locale" content="ms_MY" />
+<meta name="twitter:card" content="summary_large_image" />
 <link rel="icon" type="image/png" href="brand%20assets/MyGrocer%20Favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=BioRhyme:wght@400;700;800&family=Noto+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
-<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" integrity="sha384-DGyLxAyjq0f9SPpVevD6IgztCFlnMF6oW/XQGmfe+IsZ8TqEiDrcHkMLKI6fiB/Z" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" integrity="sha384-gTGxhz21lVGYNMcdJOyq01Edg0jhn/c22nsx0kyqP0TxaV5WVdsSH1fSDUf5YJj1" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
@@ -99,7 +109,7 @@
   .sec-lede{font-size:18px;color:var(--muted);max-width:640px;line-height:1.55}
 
   .what-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:center}
-  .what-slider{position:relative;aspect-ratio:1/1.05;border-radius:24px;overflow:hidden;border:1.5px solid var(--line);box-shadow:0 20px 48px -16px rgba(61,43,158,.18)}
+  .what-slider{position:relative;aspect-ratio:1/1.05;border-radius:24px;overflow:hidden;border:1.5px solid var(--line);box-shadow:0 20px 48px -16px rgba(134,54,148,.18)}
   .what-slide-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .9s cubic-bezier(.22,1,.36,1)}
   .what-slide-img.active{opacity:1}
   .what-slider-dots{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);display:flex;gap:8px;z-index:10}
@@ -170,7 +180,7 @@
 
   .loc-dropdown{position:relative;margin-top:32px}
   .loc-select{width:100%;appearance:none;-webkit-appearance:none;background:#fff;border:1.5px solid var(--line);border-radius:14px;padding:14px 44px 14px 18px;font-size:15px;font-weight:700;font-family:inherit;color:var(--ink);cursor:pointer;transition:border-color .2s,box-shadow .2s;outline:none}
-  .loc-select:focus,.loc-select:hover{border-color:var(--purple);box-shadow:0 0 0 3px rgba(61,43,158,.10)}
+  .loc-select:focus,.loc-select:hover{border-color:var(--purple);box-shadow:0 0 0 3px rgba(134,54,148,.10)}
   .loc-select-arrow{position:absolute;right:16px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--purple);font-size:18px;line-height:1}
   .leaflet-container{border-radius:24px!important}
   .leaflet-popup-content-wrapper{border-radius:12px!important;font-family:'Noto Sans',sans-serif;font-size:13px;font-weight:700}
@@ -356,7 +366,6 @@ function Nav(){
     {href:'#home',  label:t('Utama','Home')},
     {href:'#about', label:t('Tentang Kami','About Us')},
     {href:'#how',   label:t('Cara Guna','How It Works')},
-    {href:'#contact', label:t('Produk','Products')},
     {href:'#contact',label:t('Lokasi','Location')},
   ];
   useEffect(()=>{
@@ -433,8 +442,8 @@ function Hero(){
     },
   ];
   const STORE_PHOTOS = [
-    { src:"images/MyGrocer Store Front.jpg", alt:"MyGrocer store front", caption:"MyGrocer · Taman Sri Sentosa" },
-    { src:"images/Taman Medan MyGrocer Shop.jpeg", alt:"MyGrocer Taman Medan store front", caption:"MyGrocer · Taman Medan" },
+    { src:"images/MyGrocer%20Store%20Front-web.jpg", alt:"MyGrocer store front", caption:"MyGrocer · Taman Sri Sentosa" },
+    { src:"images/Taman%20Medan%20MyGrocer%20Shop-web.jpg", alt:"MyGrocer Taman Medan store front", caption:"MyGrocer · Taman Medan" },
   ];
   const [idx,setIdx]=useState(0);
   useEffect(()=>{const it=setInterval(()=>setIdx(i=>(i+1)%SLIDES.length),5500);return()=>clearInterval(it)},[]);
@@ -460,7 +469,7 @@ function Hero(){
             <span style={{opacity:.6}}>{String(idx+1).padStart(2,'0')} / 0{SLIDES.length}</span>
             <span style={{display:'flex',gap:6,marginLeft:'auto'}}>
               {SLIDES.map((_,i)=>(
-                <button key={i} onClick={()=>setIdx(i)} aria-label={"slide "+(i+1)} style={{width:i===idx?28:10,height:6,borderRadius:3,background:i===idx?'var(--purple)':'rgba(61,43,158,.25)',transition:'width .25s'}}/>
+                <button key={i} onClick={()=>setIdx(i)} aria-label={"slide "+(i+1)} style={{width:i===idx?28:10,height:6,borderRadius:3,background:i===idx?'var(--purple)':'rgba(134,54,148,.25)',transition:'width .25s'}}/>
               ))}
             </span>
           </div>
@@ -738,7 +747,7 @@ function Footer(){
             <div className="foot-col">
               <h5>{t("Hubungi","Contact")}</h5>
               <ul>
-                <li>hello@mygrocer.com.my</li>
+                <li><a href="mailto:hello@mygrocer.com.my">hello@mygrocer.com.my</a></li>
               </ul>
             </div>
             <div className="foot-col">
@@ -752,7 +761,7 @@ function Footer(){
             </div>
           </div>
           <div className="foot-bottom">
-            <div className="foot-copy">© 2025 <b>MyGrocer™</b> · {t("Keperluan Harian. Tanpa Leceh.","Daily essentials. No fuss.")}</div>
+            <div className="foot-copy">© {new Date().getFullYear()} <b>MyGrocer™</b> · {t("Keperluan Harian. Tanpa Leceh.","Daily essentials. No fuss.")}</div>
             <div className="foot-copy mono">{t("MASUK · AMBIL · CHECK OUT · …SENANG AJE!","ENTER · PICK · CHECK OUT · …IT'S THAT EASY!")}</div>
           </div>
         </div>
